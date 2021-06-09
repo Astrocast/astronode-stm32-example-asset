@@ -50,7 +50,7 @@ In this section, we will describe all the steps from cloning the repository to s
 &nbsp;
 
 1. The first step is to clone this repository to your local machine. To do so you could use :
-    > git clone https://github.com/Astrocast/Example_Asset.git
+    > git clone https://github.com/Astrocast/astronode-stm32-example-asset.git
 
     Or simply download it as a zip files and extract it where it makes sense for you.
 
