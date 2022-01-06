@@ -228,8 +228,7 @@ This section gives some details on the sequence you should follow to use the Exa
 
 7. Go into an infinite loop to send/receive messages.
 
-
-
+---
 
 ## Disclaimer
 
