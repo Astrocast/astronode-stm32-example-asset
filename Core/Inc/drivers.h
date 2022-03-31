@@ -14,7 +14,6 @@
 // Definitions
 //------------------------------------------------------------------------------
 #define ASTRONODE_MAX_UART_BUFFER_LENGTH 800
-#define ASTRONODE_UART_DEBUG_BUFFER_LENGTH 80
 
 #define PIN_PUSH_BUTTON     GPIO_PIN_13
 #define PORT_PUSH_BUTTON    GPIOC
@@ -58,6 +57,5 @@ void reset_astronode(void);
 uint32_t get_systick(void);
 
 bool is_systick_timeout_over(uint32_t starting_value, uint16_t duration);
-
 
 #endif /* DRIVERS_H */
