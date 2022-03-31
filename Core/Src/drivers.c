@@ -56,6 +56,7 @@ void reset_astronode(void)
     HAL_GPIO_WritePin(PORT_RESET_GPIO, PIN_RESET_GPIO, GPIO_PIN_SET);
     HAL_Delay(1);
     HAL_GPIO_WritePin(PORT_RESET_GPIO, PIN_RESET_GPIO, GPIO_PIN_RESET);
+    HAL_Delay(250);
 }
 
 /**
