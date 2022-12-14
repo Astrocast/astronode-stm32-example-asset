@@ -74,6 +74,8 @@ void astronode_send_sak_cr(void);
 
 void astronode_send_sak_rr(void);
 
+void astronode_send_ssc_wr(uint8_t search_period_enum, bool enable_search_without_msg_queued);
+
 void astronode_send_wif_wr(char *p_wlan_ssid, char *p_wlan_key, char *p_auth_token);
 
 void astronode_send_mpn_rr(void);
