@@ -284,6 +284,25 @@ void astronode_send_cfg_wr(bool payload_acknowledgment,
     }
 }
 
+void astronode_send_ctx_sr(void)
+{
+    astronode_app_msg_t request = {0};
+    astronode_app_msg_t answer = {0};
+
+    request.op_code = ASTRONODE_OP_CODE_CTX_SR;
+
+    astronode_transport_send_receive(&request, &answer);
+
+    if (answer.op_code == ASTRONODE_OP_CODE_CTX_SA)
+    {
+        send_debug_logs("Astronode configuration successfully saved in NVM.");
+    }
+    else
+    {
+        send_debug_logs("Failed to save the Astronode configuration in NVM.");
+    }
+}
+
 void astronode_send_mgi_rr(void)
 {
     astronode_app_msg_t request = {0};
