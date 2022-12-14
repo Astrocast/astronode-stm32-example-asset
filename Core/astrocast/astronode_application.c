@@ -307,16 +307,16 @@ void astronode_send_mgi_rr(void)
     }
 }
 
-void astronode_send_dsn_rr(void)
+void astronode_send_msn_rr(void)
 {
     astronode_app_msg_t request = {0};
     astronode_app_msg_t answer = {0};
 
-    request.op_code = ASTRONODE_OP_CODE_DSN_RR;
+    request.op_code = ASTRONODE_OP_CODE_MSN_RR;
 
     if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
     {
-        if (answer.op_code == ASTRONODE_OP_CODE_DSN_RA)
+        if (answer.op_code == ASTRONODE_OP_CODE_MSN_RA)
         {
             char serial_number[answer.payload_len];
             send_debug_logs("Module's Serial Number is:");

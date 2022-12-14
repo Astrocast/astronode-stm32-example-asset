@@ -52,7 +52,7 @@ void astronode_send_cfg_wr( bool payload_acknowledgment,
 
 void astronode_send_mgi_rr(void);
 
-void astronode_send_dsn_rr(void);
+void astronode_send_msn_rr(void);
 
 void astronode_send_nco_rr(void);
 
