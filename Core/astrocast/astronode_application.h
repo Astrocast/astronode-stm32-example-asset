@@ -50,7 +50,7 @@ void astronode_send_cfg_wr( bool payload_acknowledgment,
                             bool command_available_event_pin_mask,
                             bool message_tx_event_pin_mask);
 
-void astronode_send_dgi_rr(void);
+void astronode_send_mgi_rr(void);
 
 void astronode_send_dsn_rr(void);
 

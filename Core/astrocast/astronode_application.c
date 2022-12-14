@@ -284,16 +284,16 @@ void astronode_send_cfg_wr(bool payload_acknowledgment,
     }
 }
 
-void astronode_send_dgi_rr(void)
+void astronode_send_mgi_rr(void)
 {
     astronode_app_msg_t request = {0};
     astronode_app_msg_t answer = {0};
 
-    request.op_code = ASTRONODE_OP_CODE_DGI_RR;
+    request.op_code = ASTRONODE_OP_CODE_MGI_RR;
 
     if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
     {
-        if (answer.op_code == ASTRONODE_OP_CODE_DGI_RA)
+        if (answer.op_code == ASTRONODE_OP_CODE_MGI_RA)
         {
             char guid[answer.payload_len];
             send_debug_logs("Module GUID is:");
