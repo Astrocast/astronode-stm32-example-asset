@@ -295,11 +295,11 @@ void astronode_send_ctx_sr(void)
 
     if (answer.op_code == ASTRONODE_OP_CODE_CTX_SA)
     {
-        send_debug_logs("Astronode configuration successfully saved in NVM.");
+        send_debug_logs("Astronode context successfully saved in NVM.");
     }
     else
     {
-        send_debug_logs("Failed to save the Astronode configuration in NVM.");
+        send_debug_logs("Failed to save the Astronode context in NVM.");
     }
 }
 

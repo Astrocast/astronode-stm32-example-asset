@@ -82,6 +82,8 @@ void astronode_send_wif_wr(char *p_wlan_ssid, char *p_wlan_key, char *p_auth_tok
 
 void astronode_send_mpn_rr(void);
 
+void astronode_send_per_cr(void);
+
 void astronode_send_per_rr(void);
 
 void astronode_send_mst_rr(void);
