@@ -44,6 +44,10 @@
 #define ASTRONODE_BIT_OFFSET_CMD            2
 #define ASTRONODE_BIT_OFFEST_MSG_TX         3
 
+#define ASTRONODE_BYTE_OFFSET_SSC_WR_PERIOD_ENUM    0
+#define ASTRONODE_BYTE_OFFSET_SSC_WR_ENA_SEARCH     1
+#define ASTRONODE_BIT_OFFSET_ENA_SEARCH             0
+
 #define ASTRONODE_UART_DEBUG_BUFFER_LENGTH 80
 
 #define PC_COUNTER_ID_SAT_DET_PHASE_COUNT               0x01
@@ -280,16 +284,35 @@ void astronode_send_cfg_wr(bool payload_acknowledgment,
     }
 }
 
-void astronode_send_dgi_rr(void)
+void astronode_send_ctx_sr(void)
 {
     astronode_app_msg_t request = {0};
     astronode_app_msg_t answer = {0};
 
-    request.op_code = ASTRONODE_OP_CODE_DGI_RR;
+    request.op_code = ASTRONODE_OP_CODE_CTX_SR;
+
+    astronode_transport_send_receive(&request, &answer);
+
+    if (answer.op_code == ASTRONODE_OP_CODE_CTX_SA)
+    {
+        send_debug_logs("Astronode context successfully saved in NVM.");
+    }
+    else
+    {
+        send_debug_logs("Failed to save the Astronode context in NVM.");
+    }
+}
+
+void astronode_send_mgi_rr(void)
+{
+    astronode_app_msg_t request = {0};
+    astronode_app_msg_t answer = {0};
+
+    request.op_code = ASTRONODE_OP_CODE_MGI_RR;
 
     if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
     {
-        if (answer.op_code == ASTRONODE_OP_CODE_DGI_RA)
+        if (answer.op_code == ASTRONODE_OP_CODE_MGI_RA)
         {
             char guid[answer.payload_len];
             send_debug_logs("Module GUID is:");
@@ -303,16 +326,16 @@ void astronode_send_dgi_rr(void)
     }
 }
 
-void astronode_send_dsn_rr(void)
+void astronode_send_msn_rr(void)
 {
     astronode_app_msg_t request = {0};
     astronode_app_msg_t answer = {0};
 
-    request.op_code = ASTRONODE_OP_CODE_DSN_RR;
+    request.op_code = ASTRONODE_OP_CODE_MSN_RR;
 
     if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
     {
-        if (answer.op_code == ASTRONODE_OP_CODE_DSN_RA)
+        if (answer.op_code == ASTRONODE_OP_CODE_MSN_RA)
         {
             char serial_number[answer.payload_len];
             send_debug_logs("Module's Serial Number is:");
@@ -574,6 +597,31 @@ void astronode_send_sak_cr(void)
         else
         {
             send_debug_logs("No acknowledgment available.");
+        }
+    }
+}
+
+void astronode_send_ssc_wr(uint8_t search_period_enum, bool enable_search_without_msg_queued)
+{
+    astronode_app_msg_t request = {0};
+    astronode_app_msg_t answer = {0};
+
+    request.op_code = ASTRONODE_OP_CODE_SSC_WR;
+
+    request.p_payload[ASTRONODE_BYTE_OFFSET_SSC_WR_PERIOD_ENUM] = search_period_enum;
+    request.p_payload[ASTRONODE_BYTE_OFFSET_SSC_WR_ENA_SEARCH] = enable_search_without_msg_queued << ASTRONODE_BIT_OFFSET_ENA_SEARCH;
+
+    request.payload_len = 2;
+
+    if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
+    {
+        if (answer.op_code == ASTRONODE_OP_CODE_SSC_WA)
+        {
+            send_debug_logs("Astronode satellite config successfully set.");
+        }
+        else
+        {
+            send_debug_logs("Failed to set the Astronode satellite configuration.");
         }
     }
 }

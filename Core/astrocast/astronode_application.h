@@ -50,9 +50,11 @@ void astronode_send_cfg_wr( bool payload_acknowledgment,
                             bool command_available_event_pin_mask,
                             bool message_tx_event_pin_mask);
 
-void astronode_send_dgi_rr(void);
+void astronode_send_ctx_sr(void);                            
 
-void astronode_send_dsn_rr(void);
+void astronode_send_mgi_rr(void);
+
+void astronode_send_msn_rr(void);
 
 void astronode_send_nco_rr(void);
 
@@ -74,9 +76,13 @@ void astronode_send_sak_cr(void);
 
 void astronode_send_sak_rr(void);
 
+void astronode_send_ssc_wr(uint8_t search_period_enum, bool enable_search_without_msg_queued);
+
 void astronode_send_wif_wr(char *p_wlan_ssid, char *p_wlan_key, char *p_auth_token);
 
 void astronode_send_mpn_rr(void);
+
+void astronode_send_per_cr(void);
 
 void astronode_send_per_rr(void);
 
