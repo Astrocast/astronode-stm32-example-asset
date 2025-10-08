@@ -1,3 +1,8 @@
+> [!WARNING]
+> **This project is no longer actively maintained.**
+> It is considered **legacy**, may be **incomplete**, and is provided **as-is**.
+> For an newer maintained alternative, please see [astronode-c-library](https://github.com/Astrocast/astronode-c-library).
+
 # Example Asset
 
 ## Description
